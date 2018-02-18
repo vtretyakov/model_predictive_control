@@ -97,6 +97,6 @@ The vehicle's actuation has a 100 ms latency. This latency was accounted for whe
 
 The vehicle drives smoothly with the reference velocity of 100 MPH. The simulator run video can be found in [media/simulator_MPC.mov](./media/simulator_MPC.mov).
 
-
+![Simulator run](media/simulator_MPC.gif)
 
 
