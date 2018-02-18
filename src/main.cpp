@@ -168,9 +168,12 @@ int main() {
           vector<double> next_x_vals;
           vector<double> next_y_vals;
           
-          for ( int i = 0; i < ptsx.size(); i++ ) {
-            next_x_vals.push_back( ptsx_car[i] );
-            next_y_vals.push_back( ptsy_car[i] );
+          double poly_inc = 2.5;
+          int num_points = 25;
+          for ( int i = 0; i < num_points; i++ ) {
+            double x = poly_inc * i;
+            next_x_vals.push_back( x );
+            next_y_vals.push_back( polyeval(coeffs, x) );
           }
 
           //.. add (x,y) points to list here, points are in reference to the vehicle's coordinate system
