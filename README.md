@@ -79,4 +79,24 @@ These are considered as inputs of the model, where with the help of `Ipopt` solv
 
 The control outputs are optimal when the solution minimizes our cost functions which are defined as a sum of squared errors cross-track error, steering angle error, error in reference velocity, errors in use of actuators and the rate of their use.
 
+### Timestep Length and Elapsed Duration (N & dt)
+
+The number of points `N` and the time interval of their calculation `dt` define the model-based control prediction horizon = `N * dt` seconds. In my case the optimal prediction horizon was 1 second with the resolution on 0.1 second that resulted in 10 predicted waypoints computed. Increasing the horizon too much into the future leads to unnecessary computation since the world changes drastically on high speed. Increasing the step resolution on my machine was braking the controller not being able to meet the increased computational constraints. 100 milliseconds resolution is also an optimal value given the system respond delay of 100 ms. Computing faster than the system can react brings no benefit to the controller.
+
+### Polynomial Fitting and MPC Preprocessing
+
+The waypoints provided by the simulator are prepocessed by transorming them from the world's to vehicle's reference frame (see [lines 108-113](./src/main.cpp#L104)). Then they are fed to the [`polyfit`](./src/main.cpp#L116) function to find coefficients of a 3rd order polynomial.
+
+### Model Predictive Control with Latency
+
+The vehicle's actuation has a 100 ms latency. This latency was accounted for when computing the state vector based on the vehicle's kinematic model. This step can be found in [lines 122 through 131](./src/main.cpp#L120) with the resulting state vector found in [line 135](./src/main.cpp#L133).
+
+## Simulation
+
+### The vehicle must successfully drive a lap around the track.
+
+The vehicle drives smoothly with the reference velocity of 100 MPH. The simulator run video can be found in [media/simulator_MPC.mov](./media/simulator_MPC.mov).
+
+
+
 
