@@ -23,7 +23,7 @@ const double Lf = LF;
 
 // Both the reference cross track and orientation errors are 0.
 // The reference velocity is set to 40 mph.
-double ref_v = 40;
+double ref_v = 100;
 
 // The solver takes all the state variables and actuator
 // variables in a singular vector. Thus, we should to establish
@@ -55,12 +55,12 @@ class FG_eval {
     fg[0] = 0;
     
     //cost fuctions weights
-    int cte_weight = 100;
+    int cte_weight = 2000;
     int epsi_weight = 1000;
     int v_weight = 1;
     int delta_weight = 10;
-    int a_weight = 1;
-    int delta_rate_weight = 100;
+    int a_weight = 10;
+    int delta_rate_weight = 200;
     int a_rate_weight = 10;
     
     
@@ -278,7 +278,7 @@ vector<double> MPC::Solve(Eigen::VectorXd state, Eigen::VectorXd coeffs) {
   result.push_back(solution.x[delta_start]);
   result.push_back(solution.x[a_start]);
   
-  for (int i = 0; i < N-1; i++) {
+  for (int i = 0; i < N - 1; i++) {
     result.push_back(solution.x[x_start + i + 1]);
     result.push_back(solution.x[y_start + i + 1]);
   }
