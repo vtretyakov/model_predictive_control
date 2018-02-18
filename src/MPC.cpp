@@ -7,7 +7,7 @@ using CppAD::AD;
 
 // TODO: Set the timestep length and duration
 size_t N = 10;  // set horizon
-double dt = 0.1;// to 1 second for now
+double dt = DT;// to 1 second for now
 
 // This value assumes the model presented in the classroom is used.
 //
@@ -19,7 +19,7 @@ double dt = 0.1;// to 1 second for now
 // presented in the classroom matched the previous radius.
 //
 // This is the length from front to CoG that has a similar radius.
-const double Lf = 2.67;
+const double Lf = LF;
 
 // Both the reference cross track and orientation errors are 0.
 // The reference velocity is set to 40 mph.

@@ -4,6 +4,9 @@
 #include <vector>
 #include "Eigen-3.3/Eigen/Core"
 
+#define DT 0.1
+#define LF 2.67
+
 using namespace std;
 
 class MPC {
