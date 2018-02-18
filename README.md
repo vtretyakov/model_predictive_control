@@ -50,7 +50,7 @@ The code compiles without errors with cmake and make as described in Basic Build
 
 ### The Model
 
-The model used in the project is a simple global kinematic model that returns the next state vector, given a current state input vector and an actuator vector. The model doesn't include complex interactions of the tires with the road, i.e., it doesn't mode dynamic of the vehicle.
+The model used in the project is a simple global kinematic model that returns the next state vector, given a current state input vector and an actuator vector. The model doesn't include complex interactions of the tires with the road, i.e., it doesn't model dynamics of the vehicle.
 
 ![Kinematic model equations](media/kinematic_model.png)
 
@@ -66,15 +66,15 @@ epsi[t+1] = psi[t] - psides[t] + v[t] * delta[t] / Lf * dt
 ```
 where:
 
-`x, y` - car's position coordinates
-`psi` - car's heading direction
-`v` - car's velocity
-`cte` - cross-track error
+`x, y` - car's position coordinates,
+`psi` - car's heading direction,
+`v` - car's velocity,
+`cte` - cross-track error,
 `epsi` - error in heading direction
 
 These are considered as inputs of the model, where with the help of `Ipopt` solver and `CppAD` given model's constrains like acceleration and steering angle limits, we can find our optimum control outputs:
 
-`a` - car's acceleration (throttle)
+`a` - car's acceleration (throttle),
 `delta` - steering angle
 
 The control outputs are optimal when the solution minimizes our cost functions which are defined as a sum of squared errors cross-track error, steering angle error, error in reference velocity, errors in use of actuators and the rate of their use.
