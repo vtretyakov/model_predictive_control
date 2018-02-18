@@ -55,13 +55,13 @@ class FG_eval {
     fg[0] = 0;
     
     //cost fuctions weights
-    int cte_weight = 1;
-    int epsi_weight = 1;
+    int cte_weight = 100;
+    int epsi_weight = 1000;
     int v_weight = 1;
-    int delta_weight = 1;
+    int delta_weight = 10;
     int a_weight = 1;
-    int delta_rate_weight = 500;
-    int a_rate_weight = 1;
+    int delta_rate_weight = 100;
+    int a_rate_weight = 10;
     
     
     // The part of the cost based on the reference state.
@@ -253,7 +253,7 @@ vector<double> MPC::Solve(Eigen::VectorXd state, Eigen::VectorXd coeffs) {
   options += "Sparse  true        reverse\n";
   // NOTE: Currently the solver has a maximum time limit of 0.5 seconds.
   // Change this as you see fit.
-  options += "Numeric max_cpu_time          3.5\n";
+  options += "Numeric max_cpu_time          10.5\n";
 
   // place to return solution
   CppAD::ipopt::solve_result<Dvector> solution;

@@ -125,10 +125,10 @@ int main() {
           const double actuation_delay =  100 / 1000.0; // actuator delay in seconds
           double pred_px = x0 + ( v * cos(psi0) * actuation_delay ); // cos(0) = 1, can be left out, keep just for readability
           double pred_py = y0 + ( v * sin(psi0) * actuation_delay ); // sin(0) = 0, the whole part is 0, keep just for readability
-          double pred_psi = psi0 + (v/LF) * delta  * actuation_delay;
+          double pred_psi = psi0 + (v/LF) * (-delta)  * actuation_delay;
           double pred_v = v + a * actuation_delay;
           double pred_cte = cte + v * sin(epsi) * actuation_delay;
-          double pred_epsi = epsi + pred_psi;
+          double pred_epsi = epsi + (v/LF) * (-delta)  * actuation_delay;
           
           // Feed in the predicted state values into a state vector
           Eigen::VectorXd state(6);
@@ -143,7 +143,7 @@ int main() {
           json msgJson;
           // NOTE: Remember to divide by deg2rad(25) before you send the steering value back.
           // Otherwise the values will be in between [-deg2rad(25), deg2rad(25] instead of [-1, 1].
-          msgJson["steering_angle"] = -steer_value/deg2rad(25); //simulator inversed angle
+          msgJson["steering_angle"] = -steer_value/(deg2rad(25) * LF); //simulator inversed angle
           msgJson["throttle"] = throttle_value;
 
           //Display the MPC predicted trajectory 
